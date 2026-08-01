@@ -1,0 +1,10 @@
+1.  You are facing issues when the data overlap for a decision, it happened in one of the DP question where the next
+one affected by the previous one so we have one time go forward and one time go backward, similarly we face issue in a very simple question
+https://leetcode.com/problems/widest-possible-fence/description/
+
+here for example the there are planks of size that is 5 and 2 planks size sum is also 5 then we got confused, but the solution was very easy
+keep the count for the single 5 first then , just go through the sum if the sum is there add it, because the single ones will not affect here in this case
+as the adding to single 5 won't become 5 so there was no overlapping this time.
+
+It was a simple brute force, don't repeat this mistake again.
+
