@@ -1,0 +1,138 @@
+DSA Notes :-
+
+
+sliding window can be used in two ways. increasing/decreasing window size. Fixed window size https://leetcode.com/problems/permutation-in-string/solutions/102588/java-solution-sliding-window/
+In a linked list when using slow and fast pointers. We can make the difference between them static and then increment both with one node at a time. Remove Nth Node From End of List - LeetCode
+
+ListNode sentinel = new ListNode(0);
+when you want to create a new node but don't know the starting
+return sentinel.next;
+kind of a prehead trick
+
+Binary search doesn’t always mean ‘keep dividing the set in half till get at a single element’. Dividing in half for the first time and increainsg the partition by 1 can also be considered as binary search.
+	Median of Two Sorted Arrays - LeetCode
+
+      4.   When checking if two strings are anagrams or one is jumbled of another then , one   approach is to create character count array of both and compare. Other is to increase from one string in one array and decrease the char count in same array. If whole array has only zeroes then condition is satisfied.
+Dimension array to perform BFS 
+	int dRow[] = { -1, 0, 1, 0 };
+int dCol[] = { 0, 1, 0, -1 };
+
+Or { -1, 0, 1, 0, -1 };
+
+When keys are fixed always try to use an array instead of hashmap much faster.
+Sorting while checking for duplicates (Check last submission):- https://leetcode.com/problems/contains-duplicate/
+Instead of sorting char array for matching if two string are anagrams use approach used in https://leetcode.com/problems/group-anagrams/description/ except the streams part.
+If you are trying to find the pairs for a sum using a hashmap, keep inserting in hashmap and expect on the next occurrence of element which is part of the pair instead of loading the hashmap from starting. Beautiful code which we have writtent for https://practice.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1 ||| https://leetcode.com/problems/subarray-sum-equals-k/description/
+
+
+Use searching on smaller and faster search space.
+https://leetcode.com/problems/word-ladder/description/- check your solution and faster solution.
+
+Instead of going through each word. Use current word and modify it and check if we can add to the queue or not.
+
+If you are sorting a sorted use this in case of integers Arrays.sort(intervals, (a,b)->a[0]-b[0]); Not Comparator classes as it does autoboxing internally.
+Dividing the search space check out this question https://leetcode.com/problems/minimum-interval-to-include-each-query/
+Here we are dividing the search area for each query and then querying only on a single part.
+For wrapping from a -> z don’t depend on ascii just iterate for loop as characters  for (char c = 'a'; c <= 'z'; c++) 
+
+	//Another example.
+	if(c>='0' && c<='9'){
+            	sb.deleteCharAt(sb.length()-1);
+        	}
+
+
+https://leetcode.com/discuss/study-guide/2166045/line-sweep-algorithms
+
+
+Instead of getting counts for a number using hashmap after performing some operation just replace the number the num on same array. And then sort it.
+
+class Solution {
+    public int countNicePairs(int[] nums) {
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            nums[i] = nums[i] - reverse(nums[i]);
+        }
+        Arrays.sort(nums);
+        long res = 0;
+        for (int i = 0; i < len - 1; i++) {
+            long count = 1;
+            while (i < len - 1 && nums[i] == nums[i + 1]) {
+                count++;
+                i++;
+            }
+            res = (res % mod + (count * (count - 1)) / 2) % mod;
+        }    }
+  
+Creating string from char array       - seems to be faster than string builder
+return new String(stack, 0, stackIndex+1);
+
+Care about overflows, those matters the most. Today 10/02/2025 overflow happened on a long variable.  See how in the working solution we resetted the value https://leetcode.com/problems/product-of-the-last-k-numbers/submissions/1542399711/
+https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument https://leetcode.com/problems/find-unique-binary-string/solutions/4196840/find-unique-binary-string/
+If its a circular array, to simplify things you can copy the circular part to the end of the array. https://leetcode.com/problems/alternating-groups-ii
+Binary search doesn’t need to be applied on the given input always, it can be on ranges based on the input limit https://leetcode.com/problems/maximum-candies-allocated-to-k-children/?envType=daily-question&envId=2025-03-14
+How to find a median without actually sorting but it will take extra space. Check out 3 ms approach https://leetcode.com/problems/minimum-operations-to-make-a-uni-value-grid/submissions/1587161842/
+Agar mera ek element piche element se bada hai or next element current se bada hai to next wala pichle waaley se transitive  property ke through khud hi bada hoga.
+Count of incoming and outgoing edges.
+In questions where sub array is asked it's very simple look at the problem from 2 perspective one is a simple simulation another is from the overview or bird eye perspective like circular array and normal maximum subarray
+sum += (n + divisor - 1) / divisor;  →  total += i/mid;
+            total += i%mid == 0 ? 0 : 1;
+
+
+
+Binary search :- 
+
+Agar ek element lock karna hai to low <= high
+Agar jissey dhundh rahey ho ussey chota chahiye jaise sqrt waaley mai to high return with combo of first point
+Agar jissey dhundh rahey ho ussey bada chahiye jaise find insert posi waaley mai to low return with combo of first point
+
+Universal template
+
+int low = MIN, high = MAX;
+
+while (low <= high) {
+    int mid = low + (high - low) / 2;
+
+    if (isValid(mid)) {
+        low = mid + 1;   // try to go bigger
+    } else {
+        high = mid - 1;  // go smaller
+    }
+}
+return high;  // always last valid
+
+
+25. Agar koi bhi array ya string rotated hai to  same ko dubara concatenate karne pe vo uske beech mai kahi exist karegi.
+
+26. Agar range se bahar nikal raha hai to nikaltey waqt check kar like long use kar raha hai or number int ki range se bahar nikal raha hai to tab hi check kar, long ki bhi range se bahar nikalne ka wait na kar. https://takeuforward.org/data-structure/recursive-implementation-of-atoi
+
+
+27. Recursion Jaruri nahi o(n) se hi karey ki hamesha vlue ko ek se decrease karey, aadey se bhi kaat sakta hai incase result of function helps in making the answer, to voh logn bhi answer de sakta hai see : https://leetcode.com/problems/powx-n/submissions/1930192437/
+
+
+This pattern is call fast exponential pattern or Binary exponentiation 
+long power(long a, long n) {
+    if (n == 0) return 1;
+
+    long half = power(a, n / 2);
+
+    if (n % 2 == 0)
+        return (half * half);
+    else
+        return (half * half * a);
+}
+
+
+28. https://takeuforward.org/data-structure/learn-all-patterns-of-subsequences-theory
+
+29. You have to be more careful about the edge cases, simple question like implementation of queue using stack was done in 3 tries???? Seriously. https://www.geeksforgeeks.org/problems/implement-queue-using-array/1
+
+
+
+
+
+
+
+
+
+
+
