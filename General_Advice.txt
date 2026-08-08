@@ -8,3 +8,8 @@ as the adding to single 5 won't become 5 so there was no overlapping this time.
 
 It was a simple brute force, don't repeat this mistake again.
 
+
+
+2. https://leetcode.com/problems/minimum-number-of-removals-to-make-mountain-array/description/ look at the submissions of this question you had the right idea but instead of writing the
+correct solution first, then optimize the solution change the mentality from using all these before reaching a viable solution.
+
